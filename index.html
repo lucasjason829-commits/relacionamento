@@ -3,842 +3,280 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amor Profundo — Reconecte-se com Seu Parceiro</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Checkout</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --rose: #c8796a;
-    --blush: #f2d9d3;
-    --cream: #faf6f2;
-    --deep: #1e1410;
-    --gold: #c9a96e;
-    --muted: #8a7060;
+  :root{
+    --bg: #0a0a0a;
+    --bg-card: #141414;
+    --border: #262626;
+    --accent: #e5372a;
+    --accent-dark: #b8281e;
+    --white: #f5f5f5;
+    --muted: #9a9a9a;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--white);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display:flex;
+    justify-content:center;
+    padding-bottom:60px;
+  }
+  .page{
+    width:100%;
+    max-width:600px;
   }
 
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Jost', sans-serif;
-    background: var(--cream);
-    color: var(--deep);
-    overflow-x: hidden;
+  /* ===== IMAGEM DO TOPO — coloque sua imagem aqui ===== */
+  .hero-image{
+    width:100%;
+    aspect-ratio: 600/300;
+    background:#111 url('COLOQUE_O_LINK_OU_CAMINHO_DA_SUA_IMAGEM_AQUI.jpg') center/cover no-repeat;
+    border-bottom:2px solid var(--accent);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--muted);
+    font-size:14px;
+    text-align:center;
   }
+  /* ===================================================== */
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    position: relative;
-    overflow: hidden;
+  .top-bar{
+    background:var(--accent);
+    color:#fff;
+    text-align:center;
+    padding:14px 20px;
   }
+  .top-bar strong{ display:block; font-size:15px; }
+  .top-bar span{ display:block; font-size:12.5px; opacity:.85; margin-top:2px; }
 
-  .hero-left {
-    background: var(--deep);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 80px 60px 80px 80px;
-    position: relative;
+  .steps{
+    display:flex;
+    justify-content:center;
+    gap:36px;
+    padding:22px 0 10px;
   }
+  .step{ text-align:center; font-size:11px; color:var(--muted); }
+  .step .dot{
+    width:26px;height:26px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 4px;
+    font-size:13px; font-weight:600;
+    border:1px solid var(--border);
+    background:var(--bg-card);
+  }
+  .step.done .dot{ background:var(--accent); color:#fff; border-color:var(--accent); }
+  .step.active .dot{ border-color:var(--accent); color:var(--accent); }
 
-  .hero-left::after {
-    content: '';
-    position: absolute;
-    right: -1px;
-    top: 0;
-    height: 100%;
-    width: 80px;
-    background: var(--deep);
-    clip-path: polygon(0 0, 0 100%, 100% 100%);
-  }
+  .section{ padding:0 20px; margin-top:18px; }
 
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 40px;
+  .offer-banner{
+    background:#1a1a1a;
+    border-left:3px solid var(--accent);
+    padding:10px 14px;
+    font-size:13px;
+    border-radius:4px;
   }
-  .badge::before {
-    content: '';
-    display: block;
-    width: 30px;
-    height: 1px;
-    background: var(--gold);
-  }
+  .offer-banner b{ color:var(--accent); }
 
-  .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 5vw, 80px);
-    font-weight: 300;
-    color: var(--cream);
-    line-height: 1.05;
-    margin-bottom: 28px;
+  .title{
+    text-align:center;
+    font-size:16px;
+    font-weight:700;
+    margin:18px 0 14px;
   }
+  .title span{ color:var(--accent); }
 
-  .hero h1 em {
-    font-style: italic;
-    color: var(--rose);
+  label{
+    display:block;
+    font-size:11.5px;
+    letter-spacing:.03em;
+    color:var(--muted);
+    margin-bottom:6px;
+    text-transform:uppercase;
   }
-
-  .hero-desc {
-    font-size: 16px;
-    font-weight: 300;
-    color: #b0a090;
-    line-height: 1.8;
-    max-width: 380px;
-    margin-bottom: 50px;
+  .field{ margin-bottom:14px; }
+  input{
+    width:100%;
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    color:var(--white);
+    padding:12px 14px;
+    border-radius:6px;
+    font-size:14px;
   }
+  input::placeholder{ color:#555; }
+  input:focus{ outline:none; border-color:var(--accent); }
 
-  .cta-group {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    max-width: 320px;
+  .bump{
+    border:1px dashed var(--accent);
+    border-radius:8px;
+    margin-bottom:14px;
+    overflow:hidden;
+    background:var(--bg-card);
   }
-
-  .btn-primary {
-    background: var(--rose);
-    color: white;
-    border: none;
-    padding: 18px 36px;
-    font-family: 'Jost', sans-serif;
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    text-align: center;
-    display: block;
+  .bump-tag{
+    background:var(--accent);
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    padding:5px 10px;
   }
-  .btn-primary:hover { background: #b5685a; transform: translateX(4px); }
-
-  .btn-ghost {
-    background: transparent;
-    color: var(--cream);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 18px 36px;
-    font-family: 'Jost', sans-serif;
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    text-align: center;
-    display: block;
+  .bump-body{
+    display:flex;
+    gap:12px;
+    padding:12px;
+    align-items:center;
   }
-  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+  .bump-img{
+    width:56px;height:56px;flex-shrink:0;
+    background:#222;
+    border-radius:6px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:9px;color:var(--muted);text-align:center;
+    background-size:cover;
+    background-position:center;
+  }
+  .bump-info{ flex:1; }
+  .bump-info .name{ font-size:13.5px; font-weight:700; }
+  .bump-info .desc{ font-size:11.5px; color:var(--muted); margin:2px 0 4px; }
+  .bump-info .price-old{ font-size:11px; color:#777; text-decoration:line-through; margin-right:6px; }
+  .bump-info .price-new{ font-size:13px; color:var(--accent); font-weight:700; }
+  .bump input[type=checkbox]{ width:18px; height:18px; accent-color: var(--accent); }
 
-  .hero-right {
-    background: var(--blush);
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    overflow: hidden;
-    padding: 60px 40px 0;
+  .trust{
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:14px;
+    font-size:12.5px;
+    color:var(--muted);
+    line-height:1.9;
   }
 
-  .hero-visual {
-    width: 100%;
-    max-width: 480px;
-    position: relative;
-    z-index: 2;
+  .total-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 4px;
+    font-size:14px;
   }
+  .total-row .amount{ font-size:20px; font-weight:700; color:var(--accent); }
 
-  .couple-card {
-    background: white;
-    padding: 48px 40px;
-    position: relative;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.1);
-    margin-bottom: 40px;
+  .cta{
+    display:block;
+    width:100%;
+    background:linear-gradient(180deg,var(--accent),var(--accent-dark));
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    padding:16px;
+    font-size:15px;
+    font-weight:800;
+    letter-spacing:.02em;
+    cursor:pointer;
   }
+  .cta:hover{ filter:brightness(1.05); }
 
-  .couple-card::before {
-    content: '"';
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 120px;
-    color: var(--rose);
-    position: absolute;
-    top: -20px;
-    left: 30px;
-    line-height: 1;
-    opacity: 0.3;
-  }
-
-  .couple-card p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-style: italic;
-    line-height: 1.6;
-    color: var(--deep);
-    margin-bottom: 24px;
-  }
-
-  .couple-meta {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .avatar-pair {
-    display: flex;
-  }
-  .avatar {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: 3px solid white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    background: var(--blush);
-  }
-  .avatar:last-child { margin-left: -12px; background: #f0c8c0; }
-
-  .couple-name {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--deep);
-    display: block;
-  }
-  .couple-sub {
-    font-size: 12px;
-    color: var(--muted);
-  }
-
-  .floating-stat {
-    position: absolute;
-    background: white;
-    padding: 16px 22px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-    animation: float 4s ease-in-out infinite;
-  }
-  .floating-stat:nth-child(2) { top: 15%; right: -20px; animation-delay: 0.5s; }
-  .floating-stat:nth-child(3) { top: 40%; left: -20px; animation-delay: 1.2s; }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 32px;
-    font-weight: 600;
-    color: var(--rose);
-    display: block;
-  }
-  .stat-label { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
-
-  /* ── SECTION HEADINGS ── */
-  .section-label {
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--rose);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  .section-label::before {
-    content: '';
-    display: block;
-    width: 24px;
-    height: 1px;
-    background: var(--rose);
-  }
-
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 4vw, 56px);
-    font-weight: 300;
-    line-height: 1.1;
-    color: var(--deep);
-  }
-  .section-title em { font-style: italic; color: var(--rose); }
-
-  /* ── PROBLEMS ── */
-  .problems {
-    padding: 120px 80px;
-    background: white;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 100px;
-    align-items: center;
-  }
-
-  .problems-text .section-title { margin-bottom: 30px; }
-  .problems-text p {
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 1.9;
-    color: var(--muted);
-    max-width: 460px;
-  }
-
-  .pain-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  .pain-item {
-    padding: 28px 0;
-    border-bottom: 1px solid #f0ebe5;
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    opacity: 0;
-    transform: translateX(30px);
-    transition: all 0.6s ease;
-  }
-  .pain-item.visible { opacity: 1; transform: translateX(0); }
-
-  .pain-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 42px;
-    font-weight: 300;
-    color: var(--blush);
-    line-height: 1;
-    min-width: 50px;
-  }
-  .pain-text h3 {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 6px;
-    color: var(--deep);
-  }
-  .pain-text p {
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--muted);
-    line-height: 1.7;
-  }
-
-  /* ── METHOD ── */
-  .method {
-    padding: 120px 80px;
-    background: var(--deep);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .method::before {
-    content: 'AMOR';
-    position: absolute;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 300px;
-    font-weight: 700;
-    color: rgba(255,255,255,0.03);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    white-space: nowrap;
-  }
-
-  .method-header {
-    text-align: center;
-    margin-bottom: 80px;
-  }
-  .method-header .section-label { justify-content: center; }
-  .method-header .section-title { color: var(--cream); }
-
-  .method-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .method-card {
-    background: rgba(255,255,255,0.04);
-    padding: 50px 40px;
-    transition: background 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  .method-card:hover { background: rgba(200,121,106,0.12); }
-
-  .method-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--rose);
-    transition: width 0.4s ease;
-  }
-  .method-card:hover::after { width: 100%; }
-
-  .method-icon {
-    font-size: 36px;
-    margin-bottom: 24px;
-    display: block;
-  }
-  .method-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    font-weight: 400;
-    color: var(--cream);
-    margin-bottom: 14px;
-  }
-  .method-card p {
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 1.8;
-    color: rgba(250,246,242,0.55);
-  }
-
-  /* ── TESTIMONIALS ── */
-  .testimonials {
-    padding: 120px 80px;
-    background: var(--blush);
-  }
-  .test-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 60px;
-  }
-
-  .test-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 24px;
-  }
-
-  .test-card {
-    background: white;
-    padding: 40px;
-    position: relative;
-  }
-  .test-card.featured { background: var(--deep); }
-
-  .test-stars {
-    color: var(--gold);
-    font-size: 14px;
-    letter-spacing: 3px;
-    margin-bottom: 20px;
-  }
-  .test-card p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-style: italic;
-    line-height: 1.6;
-    margin-bottom: 24px;
-    color: var(--deep);
-  }
-  .test-card.featured p { color: var(--cream); font-size: 24px; }
-
-  .test-person {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .test-avatar {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--blush);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-  }
-  .test-card.featured .test-avatar { background: rgba(255,255,255,0.1); }
-  .test-name { font-size: 14px; font-weight: 500; color: var(--deep); }
-  .test-card.featured .test-name { color: var(--cream); }
-  .test-since { font-size: 12px; color: var(--muted); }
-  .test-card.featured .test-since { color: rgba(250,246,242,0.5); }
-
-  .test-small {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  .test-small .test-card { padding: 28px 28px; }
-  .test-small .test-card p { font-size: 16px; }
-
-  /* ── CTA ── */
-  .final-cta {
-    padding: 140px 80px;
-    background: white;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 100px;
-    align-items: center;
-  }
-
-  .cta-content .section-title { margin-bottom: 20px; }
-  .cta-content > p {
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 1.9;
-    color: var(--muted);
-    margin-bottom: 50px;
-    max-width: 440px;
-  }
-
-  .price-box {
-    background: var(--cream);
-    padding: 50px 40px;
-    position: relative;
-  }
-
-  .price-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-  .price-val {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 72px;
-    font-weight: 300;
-    line-height: 1;
-    color: var(--deep);
-    margin-bottom: 6px;
-  }
-  .price-val sup { font-size: 28px; vertical-align: super; }
-  .price-period { font-size: 13px; color: var(--muted); margin-bottom: 30px; }
-  .price-includes {
-    list-style: none;
-    margin-bottom: 36px;
-  }
-  .price-includes li {
-    font-size: 14px;
-    padding: 10px 0;
-    border-bottom: 1px solid #ede8e2;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--deep);
-  }
-  .price-includes li::before {
-    content: '✦';
-    color: var(--rose);
-    font-size: 10px;
-  }
-
-  .btn-full {
-    display: block;
-    width: 100%;
-    background: var(--rose);
-    color: white;
-    border: none;
-    padding: 20px;
-    font-family: 'Jost', sans-serif;
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-    text-decoration: none;
-  }
-  .btn-full:hover { background: #b5685a; }
-
-  .guarantee {
-    text-align: center;
-    margin-top: 14px;
-    font-size: 12px;
-    color: var(--muted);
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--deep);
-    padding: 50px 80px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .footer-brand {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 26px;
-    font-weight: 300;
-    color: var(--cream);
-  }
-  .footer-brand span { color: var(--rose); }
-  .footer-links {
-    display: flex;
-    gap: 30px;
-    list-style: none;
-  }
-  .footer-links a {
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(250,246,242,0.4);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  .footer-links a:hover { color: var(--rose); }
-  .footer-copy {
-    font-size: 12px;
-    color: rgba(250,246,242,0.3);
-  }
-
-  /* ── REVEAL ANIMATION ── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; }
-    .hero-right { min-height: 50vw; padding: 40px; }
-    .hero-left { padding: 60px 32px; }
-    .hero-left::after { display: none; }
-    .problems, .final-cta { grid-template-columns: 1fr; gap: 60px; padding: 80px 32px; }
-    .method { padding: 80px 32px; }
-    .method-grid { grid-template-columns: 1fr; gap: 2px; }
-    .testimonials { padding: 80px 32px; }
-    .test-grid { grid-template-columns: 1fr; }
-    .test-header { flex-direction: column; gap: 20px; align-items: flex-start; }
-    footer { flex-direction: column; gap: 24px; padding: 40px 32px; text-align: center; }
-    .floating-stat { display: none; }
+  .footnote{
+    text-align:center;
+    font-size:11px;
+    color:#555;
+    margin-top:14px;
   }
 </style>
 </head>
 <body>
+<div class="page">
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-left">
-    <span class="badge">Método de Relacionamento</span>
-    <h1>Reconecte-se com quem você <em>ama</em></h1>
-    <p class="hero-desc">Pare de lutar contra o silêncio e a distância. Descubra o método que já ajudou mais de 12.000 casais a restaurarem o amor verdadeiro.</p>
-    <div class="cta-group">
-      <a href="#preco" class="btn-primary">Quero Reconectar Agora</a>
-      <a href="#metodo" class="btn-ghost">Como Funciona</a>
-    </div>
+  <!-- Coloque sua imagem principal (banner do topo) trocando a URL no CSS .hero-image
+       ou substituindo esta div por: <img src="sua-imagem.jpg" style="width:100%;display:block"> -->
+  <div class="hero-image">Imagem do topo entra aqui<br>(banner 600x300px)</div>
+
+  <div class="top-bar">
+    <strong>🔓 ACESSO LIBERADO — ÚLTIMA ETAPA</strong>
+    <span>Você está a 1 passo de receber o conteúdo completo no seu e-mail e WhatsApp</span>
   </div>
 
-  <div class="hero-right">
-    <div class="floating-stat" style="top:12%;right:-10px">
-      <span class="stat-num">97%</span>
-      <span class="stat-label">Taxa de satisfação</span>
-    </div>
-    <div class="floating-stat" style="top:42%;left:-10px">
-      <span class="stat-num">12k+</span>
-      <span class="stat-label">Casais transformados</span>
+  <div class="steps">
+    <div class="step done"><div class="dot">✓</div>DADOS</div>
+    <div class="step active"><div class="dot">2</div>PAGAMENTO</div>
+    <div class="step"><div class="dot">3</div>ACESSO</div>
+  </div>
+
+  <div class="section">
+    <div class="offer-banner">
+      ⚡ Oferta de lançamento: <s>R$ 77,00</s> por <b>R$ 9,90</b> — condição válida só nesta página
     </div>
 
-    <div class="hero-visual">
-      <div class="couple-card">
-        <p>Achávamos que nosso casamento havia acabado. Em 3 semanas de método, nos apaixonamos de novo.</p>
-        <div class="couple-meta">
-          <div class="avatar-pair">
-            <div class="avatar">👩</div>
-            <div class="avatar">👨</div>
-          </div>
-          <div>
-            <span class="couple-name">Ana & Ricardo</span>
-            <span class="couple-sub">Juntos há 12 anos · SP</span>
-          </div>
+    <div class="title">PREENCHA OS DADOS PARA LIBERAR <span>O ACESSO COMPLETO</span></div>
+
+    <div class="field">
+      <label>Nome completo</label>
+      <input type="text" placeholder="Seu nome completo">
+    </div>
+    <div class="field">
+      <label>E-mail</label>
+      <input type="email" placeholder="seuemail@gmail.com">
+    </div>
+    <div class="field">
+      <label>WhatsApp</label>
+      <input type="tel" placeholder="(11) 99999-9999">
+    </div>
+    <div class="field">
+      <label>CPF</label>
+      <input type="text" placeholder="000.000.000-00">
+    </div>
+
+    <!-- ORDER BUMP 1 -->
+    <div class="bump">
+      <div class="bump-tag">+ OFERTA ESPECIAL — ADICIONE AO SEU PEDIDO</div>
+      <div class="bump-body">
+        <div class="bump-img">imagem<br>produto 1</div>
+        <div class="bump-info">
+          <div class="name">[NOME DO BUMP 1]</div>
+          <div class="desc">[descrição curta e honesta do que ele entrega]</div>
+          <span class="price-old">R$ 27,00</span>
+          <span class="price-new">apenas R$ 4,97</span>
         </div>
+        <input type="checkbox">
       </div>
     </div>
-  </div>
-</section>
 
-<!-- PROBLEMS -->
-<section class="problems">
-  <div class="problems-text reveal">
-    <span class="section-label">Você se identifica?</span>
-    <h2 class="section-title">Relacionamentos <em>morrem</em> de silêncio lento</h2>
-    <p>A distância não acontece de repente. Ela cresce na rotina, nas brigas sem resolução, nos toques que deixam de existir. Se você chegou até aqui, algo em você ainda quer lutar.</p>
-  </div>
-
-  <ul class="pain-list">
-    <li class="pain-item">
-      <span class="pain-num">01</span>
-      <div class="pain-text">
-        <h3>Conversas que viram brigas</h3>
-        <p>Qualquer assunto difícil escala rapidamente e ninguém consegue realmente ouvir o outro.</p>
-      </div>
-    </li>
-    <li class="pain-item">
-      <span class="pain-num">02</span>
-      <div class="pain-text">
-        <h3>Falta de intimidade e conexão</h3>
-        <p>A cumplicidade foi se apagando. Vocês dormem no mesmo quarto mas parecem estranhos.</p>
-      </div>
-    </li>
-    <li class="pain-item">
-      <span class="pain-num">03</span>
-      <div class="pain-text">
-        <h3>Sentimento de estar sozinho</h3>
-        <p>Mesmo estando juntos, você se sente incompreendido, invisível e cada vez mais solitário.</p>
-      </div>
-    </li>
-    <li class="pain-item">
-      <span class="pain-num">04</span>
-      <div class="pain-text">
-        <h3>Medo de perder a pessoa que ama</h3>
-        <p>No fundo, você ainda ama. Mas não sabe como voltar àquela conexão que existia antes.</p>
-      </div>
-    </li>
-  </ul>
-</section>
-
-<!-- METHOD -->
-<section class="method" id="metodo">
-  <div class="method-header reveal">
-    <span class="section-label">O Caminho de Volta</span>
-    <h2 class="section-title" style="color:var(--cream)">O método <em>Amor Profundo</em></h2>
-  </div>
-
-  <div class="method-grid">
-    <div class="method-card">
-      <span class="method-icon">🔍</span>
-      <h3>Diagnóstico</h3>
-      <p>Identificamos exatamente onde a conexão foi rompida — padrões inconscientes de comunicação, feridas emocionais e gatilhos que sabotam seu relacionamento.</p>
-    </div>
-    <div class="method-card">
-      <span class="method-icon">🗣️</span>
-      <h3>Comunicação Real</h3>
-      <p>Técnicas validadas pela neurociência para transformar conflitos em pontes. Você aprende a falar e, principalmente, a ouvir de verdade.</p>
-    </div>
-    <div class="method-card">
-      <span class="method-icon">💞</span>
-      <h3>Reconexão Profunda</h3>
-      <p>Rituais diários simples que reacendem a intimidade emocional, física e espiritual — reconstruindo a cumplicidade que vocês um dia tiveram.</p>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-  <div class="test-header reveal">
-    <div>
-      <span class="section-label">Histórias Reais</span>
-      <h2 class="section-title">O amor que <em>voltou</em></h2>
-    </div>
-    <div style="font-family:'Cormorant Garamond',serif; font-size:56px; font-weight:300; color:var(--rose); line-height:1">
-      4.9 ★
-    </div>
-  </div>
-
-  <div class="test-grid">
-    <div class="test-card featured reveal">
-      <div class="test-stars">★★★★★</div>
-      <p>Estávamos às vésperas do divórcio. Três filhos, 15 anos juntos — e parecia que tudo tinha acabado. O método me ensinou a ver meu marido de novo, como se fosse a primeira vez. Hoje somos mais felizes do que nos primeiros anos.</p>
-      <div class="test-person">
-        <div class="test-avatar">👩</div>
-        <div>
-          <span class="test-name">Fernanda M.</span>
-          <span class="test-since">Juntos há 15 anos · RJ</span>
+    <!-- ORDER BUMP 2 -->
+    <div class="bump">
+      <div class="bump-tag">★ MAIS PROCURADO — APROVEITE ENQUANTO HÁ VAGAS</div>
+      <div class="bump-body">
+        <div class="bump-img">imagem<br>produto 2</div>
+        <div class="bump-info">
+          <div class="name">[NOME DO BUMP 2]</div>
+          <div class="desc">[descrição curta e honesta do que ele entrega]</div>
+          <span class="price-old">R$ 27,00</span>
+          <span class="price-new">apenas R$ 4,97</span>
         </div>
+        <input type="checkbox">
       </div>
     </div>
 
-    <div class="test-small">
-      <div class="test-card reveal">
-        <div class="test-stars">★★★★★</div>
-        <p>Aprendi que o problema não era minha esposa, era a forma como eu me comunicava. Mudança real em semanas.</p>
-        <div class="test-person">
-          <div class="test-avatar">👨</div>
-          <div>
-            <span class="test-name">Carlos R.</span>
-            <span class="test-since">BH · 8 anos juntos</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="test-card reveal" style="background:var(--deep)">
-        <div class="test-stars">★★★★★</div>
-        <p style="color:var(--cream)">Voltamos a rir juntos. Parece simples, mas era o que mais fazia falta.</p>
-        <div class="test-person">
-          <div class="test-avatar" style="background:rgba(255,255,255,0.1)">💑</div>
-          <div>
-            <span class="test-name" style="color:var(--cream)">Juliana & Paulo</span>
-            <span class="test-since" style="color:rgba(250,246,242,0.5)">Porto Alegre</span>
-          </div>
-        </div>
-      </div>
+    <div class="trust">
+      🔒 Compra 100% segura — criptografia SSL<br>
+      ⚡ Acesso imediato após confirmação do pagamento<br>
+      🛡️ Garantia de 7 dias — devolução sem perguntas<br>
+      ⭐ [Prova social real, se tiver: nº de clientes / avaliação média]
     </div>
-  </div>
-</section>
 
-<!-- FINAL CTA -->
-<section class="final-cta" id="preco">
-  <div class="cta-content reveal">
-    <span class="section-label">Comece Hoje</span>
-    <h2 class="section-title">Cada dia <em>importa</em></h2>
-    <p>A distância cresce com o tempo. O melhor momento para agir era ontem. O segundo melhor momento é agora — antes que o silêncio se torne permanente.</p>
-    <div style="display:flex; flex-direction:column; gap:16px; max-width:340px;">
-      <div style="display:flex; align-items:center; gap:12px; font-size:14px; color:var(--muted)">
-        <span style="color:var(--rose); font-size:18px">♥</span>
-        Acesso imediato, 100% online
-      </div>
-      <div style="display:flex; align-items:center; gap:12px; font-size:14px; color:var(--muted)">
-        <span style="color:var(--rose); font-size:18px">♥</span>
-        Funciona mesmo se só você fizer
-      </div>
-      <div style="display:flex; align-items:center; gap:12px; font-size:14px; color:var(--muted)">
-        <span style="color:var(--rose); font-size:18px">♥</span>
-        Garantia de 30 dias ou reembolso total
-      </div>
+    <div class="total-row">
+      <span>Total a pagar:</span>
+      <span class="amount">R$ 9,90</span>
     </div>
+
+    <button class="cta">🔓 LIBERAR ACESSO COMPLETO — R$ 9,90</button>
+    <div class="footnote">Pagamento processado com segurança. Cancelamento garantido em até 7 dias.</div>
   </div>
 
-  <div class="price-box reveal">
-    <p class="price-label">Acesso Completo</p>
-    <div class="price-val"><sup>R$</sup>97</div>
-    <p class="price-period">pagamento único · acesso vitalício</p>
-    <ul class="price-includes">
-      <li>Método Amor Profundo completo (6 módulos)</li>
-      <li>Guia de comunicação não-violenta</li>
-      <li>30 rituais de reconexão diária</li>
-      <li>Comunidade privada de casais</li>
-      <li>Suporte por 60 dias</li>
-    </ul>
-    <a href="#" class="btn-full">Quero Reconectar Agora</a>
-    <p class="guarantee">🔒 Garantia de 30 dias — risco zero para você</p>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-brand">Amor<span>Profundo</span></div>
-  <ul class="footer-links">
-    <li><a href="#">Início</a></li>
-    <li><a href="#">Método</a></li>
-    <li><a href="#">Depoimentos</a></li>
-    <li><a href="#">Contato</a></li>
-  </ul>
-  <span class="footer-copy">© 2026 AmorProfundo</span>
-</footer>
-
-<script>
-  // Reveal on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(el => {
-      if (el.isIntersecting) {
-        el.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.15 });
-
-  document.querySelectorAll('.reveal, .pain-item').forEach(el => observer.observe(el));
-
-  // Staggered pain items
-  document.querySelectorAll('.pain-item').forEach((el, i) => {
-    el.style.transitionDelay = `${i * 0.12}s`;
-  });
-</script>
+</div>
 </body>
 </html>
