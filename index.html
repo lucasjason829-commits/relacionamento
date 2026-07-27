@@ -56,12 +56,18 @@
   .progress-track{ height:6px; background:#f1e3e1; border-radius:4px; overflow:hidden; margin-bottom:22px; }
   .progress-fill{ height:100%; background: linear-gradient(90deg, var(--wine), var(--ember)); border-radius:4px; transition: width .4s ease; }
   .option{
-    display:block; width:100%; text-align:left; background:#fdf4f3; border:1.5px solid var(--card-line);
-    border-radius:14px; padding:16px 16px; margin-bottom:12px; font-size:15px; color:var(--ink);
+    display:flex; align-items:center; gap:12px; width:100%; text-align:left;
+    background:#fdecec; border:1.5px solid #f3b0ac;
+    border-radius:16px; padding:15px 18px; margin-bottom:12px; font-size:15px; color:#1a1a1a;
     cursor:pointer; transition: all .15s ease; font-family:inherit;
   }
-  .option:hover{ border-color:var(--wine); background:#fbe9e7; }
+  .option::before{
+    content:''; width:19px; height:19px; min-width:19px; border-radius:50%;
+    border:2px solid var(--wine); background:#fff; flex-shrink:0;
+  }
+  .option:hover{ border-color:var(--wine); background:#fbdedb; }
   .option:active{ transform: scale(0.98); }
+  .option:active::before{ background: var(--wine); }
 
   /* Teaser screen */
   .chat-mock{ background:#f5f0ea; border-radius:16px; padding:16px; margin-bottom:20px; }
