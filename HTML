@@ -2,843 +2,332 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amor Profundo — Reconecte-se com Seu Parceiro</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Protocolo Recomeço</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --rose: #c8796a;
-    --blush: #f2d9d3;
-    --cream: #faf6f2;
-    --deep: #1e1410;
-    --gold: #c9a96e;
-    --muted: #8a7060;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Jost', sans-serif;
-    background: var(--cream);
-    color: var(--deep);
-    overflow-x: hidden;
-  }
-
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-left {
-    background: var(--deep);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 80px 60px 80px 80px;
-    position: relative;
-  }
-
-  .hero-left::after {
-    content: '';
-    position: absolute;
-    right: -1px;
-    top: 0;
-    height: 100%;
-    width: 80px;
-    background: var(--deep);
-    clip-path: polygon(0 0, 0 100%, 100% 100%);
-  }
-
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 40px;
-  }
-  .badge::before {
-    content: '';
-    display: block;
-    width: 30px;
-    height: 1px;
-    background: var(--gold);
-  }
-
-  .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 5vw, 80px);
-    font-weight: 300;
-    color: var(--cream);
-    line-height: 1.05;
-    margin-bottom: 28px;
-  }
-
-  .hero h1 em {
-    font-style: italic;
-    color: var(--rose);
-  }
-
-  .hero-desc {
+  :root{
+    --bg: #1c0f10;
+    --bg-soft: #2a1416;
+    --card: #ffffff;
+    --card-line: #f3d9d3;
+    --wine: #7a1f2b;
+    --wine-dark: #55131c;
+    --ember: #e0483a;
+    --gold: #d9a441;
+    --ink: #241012;
+    --ink-soft: #6b4a4d;
+    --green: #1f8a4c;
+    --green-dark: #146336;
     font-size: 16px;
-    font-weight: 300;
-    color: #b0a090;
-    line-height: 1.8;
-    max-width: 380px;
-    margin-bottom: 50px;
   }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .screen{ display:none; max-width:480px; margin:0 auto; padding:28px 18px 60px; min-height:100vh; background:#fff; }
+  .screen.active{ display:block; }
+  .eyebrow{
+    display:inline-block; font-size:12px; font-weight:700; letter-spacing:.06em;
+    color: var(--wine); background: #fbeceb; padding:4px 10px; border-radius:20px; margin-bottom:14px;
+  }
+  h1{ font-size:22px; line-height:1.35; margin:0 0 18px; color:var(--ink); font-weight:800; }
+  h2.question{ font-size:19px; line-height:1.4; margin:6px 0 22px; font-weight:800; }
+  .progress-track{ height:6px; background:#f1e3e1; border-radius:4px; overflow:hidden; margin-bottom:22px; }
+  .progress-fill{ height:100%; background: linear-gradient(90deg, var(--wine), var(--ember)); border-radius:4px; transition: width .4s ease; }
+  .option{
+    display:block; width:100%; text-align:left; background:#fdf4f3; border:1.5px solid var(--card-line);
+    border-radius:14px; padding:16px 16px; margin-bottom:12px; font-size:15px; color:var(--ink);
+    cursor:pointer; transition: all .15s ease; font-family:inherit;
+  }
+  .option:hover{ border-color:var(--wine); background:#fbe9e7; }
+  .option:active{ transform: scale(0.98); }
 
-  .cta-group {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    max-width: 320px;
+  /* Teaser screen */
+  .chat-mock{ background:#f5f0ea; border-radius:16px; padding:16px; margin-bottom:20px; }
+  .bubble{ background:#fff; border-radius:12px; padding:10px 14px; margin-bottom:8px; font-size:13.5px; max-width:80%; box-shadow:0 1px 2px rgba(0,0,0,.06); }
+  .bubble .time{ display:block; font-size:10px; color:#999; margin-top:2px; }
+  .bubble.call{ display:flex; align-items:center; gap:8px; color:var(--wine); font-weight:600; }
+  .cta-btn{
+    display:block; width:100%; background: linear-gradient(180deg, var(--green), var(--green-dark));
+    color:#fff; border:none; border-radius:12px; padding:17px; font-size:15.5px; font-weight:800;
+    text-align:center; cursor:pointer; box-shadow:0 4px 0 rgba(0,0,0,.15); margin:16px 0;
   }
+  .cta-btn:active{ transform: translateY(2px); box-shadow:0 2px 0 rgba(0,0,0,.15); }
+  .check-list{ margin-top:18px; }
+  .check-item{ display:flex; gap:10px; align-items:flex-start; background:#effbf3; border-radius:10px; padding:12px; margin-bottom:8px; font-size:13.5px; }
+  .check-item .mark{ color:var(--green-dark); font-weight:900; flex-shrink:0; }
 
-  .btn-primary {
-    background: var(--rose);
-    color: white;
-    border: none;
-    padding: 18px 36px;
-    font-family: 'Jost', sans-serif;
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    text-align: center;
-    display: block;
+  /* Loading screen */
+  .loading-wrap{ text-align:center; padding-top:40px; }
+  .spinner{
+    width:56px; height:56px; margin:0 auto 26px; border-radius:50%;
+    border:5px solid #f1e3e1; border-top-color: var(--wine); animation: spin 1s linear infinite;
   }
-  .btn-primary:hover { background: #b5685a; transform: translateX(4px); }
+  @keyframes spin{ to{ transform: rotate(360deg); } }
+  .step-row{ text-align:left; font-size:13.5px; margin-bottom:12px; }
+  .step-row .label{ display:flex; justify-content:space-between; margin-bottom:5px; }
+  .step-bar{ height:6px; background:#f1e3e1; border-radius:4px; overflow:hidden; }
+  .step-bar-fill{ height:100%; width:0%; background: var(--green); border-radius:4px; transition: width 1.1s ease; }
+  .step-pct{ font-weight:700; color: var(--green-dark); }
 
-  .btn-ghost {
-    background: transparent;
-    color: var(--cream);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 18px 36px;
-    font-family: 'Jost', sans-serif;
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    text-align: center;
-    display: block;
+  /* Bonus stack */
+  .bonus-card{ border:1.5px solid #f6c6c0; border-radius:14px; padding:14px; margin-bottom:14px; position:relative; overflow:hidden; }
+  .bonus-tag{ background:#fdecea; color:var(--wine); font-size:11.5px; font-weight:800; padding:4px 8px; border-radius:6px; display:inline-block; margin-bottom:8px; }
+  .bonus-title{ font-size:15.5px; font-weight:800; margin:2px 0 4px; }
+  .bonus-old{ color:#a89a97; text-decoration:line-through; font-size:13px; }
+  .bonus-free{ color:var(--green-dark); font-weight:900; font-size:15px; margin-left:8px; }
+  .bonus-desc{ font-size:13px; color:var(--ink-soft); margin-top:6px; }
+  .timer{ display:inline-flex; gap:8px; background:var(--wine-dark); color:#fff; padding:10px 16px; border-radius:10px; font-weight:800; margin:14px auto; }
+  .timer-box{ text-align:center; }
+  .timer-box small{ display:block; font-size:9px; opacity:.75; font-weight:600; }
+  .center{ text-align:center; }
+  .copy-block p{ font-size:14.5px; line-height:1.6; margin:0 0 14px; }
+  .copy-block strong{ color:var(--wine); }
+  .video-placeholder{
+    background:#111; border-radius:14px; aspect-ratio:9/16; display:flex; align-items:center; justify-content:center;
+    color:#eee; font-size:13px; text-align:center; padding:20px; margin-bottom:18px; border:2px dashed var(--gold);
   }
-  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
-
-  .hero-right {
-    background: var(--blush);
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    overflow: hidden;
-    padding: 60px 40px 0;
-  }
-
-  .hero-visual {
-    width: 100%;
-    max-width: 480px;
-    position: relative;
-    z-index: 2;
-  }
-
-  .couple-card {
-    background: white;
-    padding: 48px 40px;
-    position: relative;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.1);
-    margin-bottom: 40px;
-  }
-
-  .couple-card::before {
-    content: '"';
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 120px;
-    color: var(--rose);
-    position: absolute;
-    top: -20px;
-    left: 30px;
-    line-height: 1;
-    opacity: 0.3;
-  }
-
-  .couple-card p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-style: italic;
-    line-height: 1.6;
-    color: var(--deep);
-    margin-bottom: 24px;
-  }
-
-  .couple-meta {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .avatar-pair {
-    display: flex;
-  }
-  .avatar {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: 3px solid white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    background: var(--blush);
-  }
-  .avatar:last-child { margin-left: -12px; background: #f0c8c0; }
-
-  .couple-name {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--deep);
-    display: block;
-  }
-  .couple-sub {
-    font-size: 12px;
-    color: var(--muted);
-  }
-
-  .floating-stat {
-    position: absolute;
-    background: white;
-    padding: 16px 22px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-    animation: float 4s ease-in-out infinite;
-  }
-  .floating-stat:nth-child(2) { top: 15%; right: -20px; animation-delay: 0.5s; }
-  .floating-stat:nth-child(3) { top: 40%; left: -20px; animation-delay: 1.2s; }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 32px;
-    font-weight: 600;
-    color: var(--rose);
-    display: block;
-  }
-  .stat-label { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
-
-  /* ── SECTION HEADINGS ── */
-  .section-label {
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--rose);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  .section-label::before {
-    content: '';
-    display: block;
-    width: 24px;
-    height: 1px;
-    background: var(--rose);
-  }
-
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 4vw, 56px);
-    font-weight: 300;
-    line-height: 1.1;
-    color: var(--deep);
-  }
-  .section-title em { font-style: italic; color: var(--rose); }
-
-  /* ── PROBLEMS ── */
-  .problems {
-    padding: 120px 80px;
-    background: white;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 100px;
-    align-items: center;
-  }
-
-  .problems-text .section-title { margin-bottom: 30px; }
-  .problems-text p {
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 1.9;
-    color: var(--muted);
-    max-width: 460px;
-  }
-
-  .pain-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  .pain-item {
-    padding: 28px 0;
-    border-bottom: 1px solid #f0ebe5;
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    opacity: 0;
-    transform: translateX(30px);
-    transition: all 0.6s ease;
-  }
-  .pain-item.visible { opacity: 1; transform: translateX(0); }
-
-  .pain-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 42px;
-    font-weight: 300;
-    color: var(--blush);
-    line-height: 1;
-    min-width: 50px;
-  }
-  .pain-text h3 {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 6px;
-    color: var(--deep);
-  }
-  .pain-text p {
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--muted);
-    line-height: 1.7;
-  }
-
-  /* ── METHOD ── */
-  .method {
-    padding: 120px 80px;
-    background: var(--deep);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .method::before {
-    content: 'AMOR';
-    position: absolute;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 300px;
-    font-weight: 700;
-    color: rgba(255,255,255,0.03);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    white-space: nowrap;
-  }
-
-  .method-header {
-    text-align: center;
-    margin-bottom: 80px;
-  }
-  .method-header .section-label { justify-content: center; }
-  .method-header .section-title { color: var(--cream); }
-
-  .method-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .method-card {
-    background: rgba(255,255,255,0.04);
-    padding: 50px 40px;
-    transition: background 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  .method-card:hover { background: rgba(200,121,106,0.12); }
-
-  .method-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--rose);
-    transition: width 0.4s ease;
-  }
-  .method-card:hover::after { width: 100%; }
-
-  .method-icon {
-    font-size: 36px;
-    margin-bottom: 24px;
-    display: block;
-  }
-  .method-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    font-weight: 400;
-    color: var(--cream);
-    margin-bottom: 14px;
-  }
-  .method-card p {
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 1.8;
-    color: rgba(250,246,242,0.55);
-  }
-
-  /* ── TESTIMONIALS ── */
-  .testimonials {
-    padding: 120px 80px;
-    background: var(--blush);
-  }
-  .test-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 60px;
-  }
-
-  .test-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 24px;
-  }
-
-  .test-card {
-    background: white;
-    padding: 40px;
-    position: relative;
-  }
-  .test-card.featured { background: var(--deep); }
-
-  .test-stars {
-    color: var(--gold);
-    font-size: 14px;
-    letter-spacing: 3px;
-    margin-bottom: 20px;
-  }
-  .test-card p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-style: italic;
-    line-height: 1.6;
-    margin-bottom: 24px;
-    color: var(--deep);
-  }
-  .test-card.featured p { color: var(--cream); font-size: 24px; }
-
-  .test-person {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .test-avatar {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--blush);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-  }
-  .test-card.featured .test-avatar { background: rgba(255,255,255,0.1); }
-  .test-name { font-size: 14px; font-weight: 500; color: var(--deep); }
-  .test-card.featured .test-name { color: var(--cream); }
-  .test-since { font-size: 12px; color: var(--muted); }
-  .test-card.featured .test-since { color: rgba(250,246,242,0.5); }
-
-  .test-small {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  .test-small .test-card { padding: 28px 28px; }
-  .test-small .test-card p { font-size: 16px; }
-
-  /* ── CTA ── */
-  .final-cta {
-    padding: 140px 80px;
-    background: white;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 100px;
-    align-items: center;
-  }
-
-  .cta-content .section-title { margin-bottom: 20px; }
-  .cta-content > p {
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 1.9;
-    color: var(--muted);
-    margin-bottom: 50px;
-    max-width: 440px;
-  }
-
-  .price-box {
-    background: var(--cream);
-    padding: 50px 40px;
-    position: relative;
-  }
-
-  .price-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-  .price-val {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 72px;
-    font-weight: 300;
-    line-height: 1;
-    color: var(--deep);
-    margin-bottom: 6px;
-  }
-  .price-val sup { font-size: 28px; vertical-align: super; }
-  .price-period { font-size: 13px; color: var(--muted); margin-bottom: 30px; }
-  .price-includes {
-    list-style: none;
-    margin-bottom: 36px;
-  }
-  .price-includes li {
-    font-size: 14px;
-    padding: 10px 0;
-    border-bottom: 1px solid #ede8e2;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--deep);
-  }
-  .price-includes li::before {
-    content: '✦';
-    color: var(--rose);
-    font-size: 10px;
-  }
-
-  .btn-full {
-    display: block;
-    width: 100%;
-    background: var(--rose);
-    color: white;
-    border: none;
-    padding: 20px;
-    font-family: 'Jost', sans-serif;
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-    text-decoration: none;
-  }
-  .btn-full:hover { background: #b5685a; }
-
-  .guarantee {
-    text-align: center;
-    margin-top: 14px;
-    font-size: 12px;
-    color: var(--muted);
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--deep);
-    padding: 50px 80px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .footer-brand {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 26px;
-    font-weight: 300;
-    color: var(--cream);
-  }
-  .footer-brand span { color: var(--rose); }
-  .footer-links {
-    display: flex;
-    gap: 30px;
-    list-style: none;
-  }
-  .footer-links a {
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(250,246,242,0.4);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  .footer-links a:hover { color: var(--rose); }
-  .footer-copy {
-    font-size: 12px;
-    color: rgba(250,246,242,0.3);
-  }
-
-  /* ── REVEAL ANIMATION ── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; }
-    .hero-right { min-height: 50vw; padding: 40px; }
-    .hero-left { padding: 60px 32px; }
-    .hero-left::after { display: none; }
-    .problems, .final-cta { grid-template-columns: 1fr; gap: 60px; padding: 80px 32px; }
-    .method { padding: 80px 32px; }
-    .method-grid { grid-template-columns: 1fr; gap: 2px; }
-    .testimonials { padding: 80px 32px; }
-    .test-grid { grid-template-columns: 1fr; }
-    .test-header { flex-direction: column; gap: 20px; align-items: flex-start; }
-    footer { flex-direction: column; gap: 24px; padding: 40px 32px; text-align: center; }
-    .floating-stat { display: none; }
-  }
+  .note{ background:#fff8e6; border:1px solid #f0d989; border-radius:10px; padding:10px 12px; font-size:12.5px; color:#5c4a1a; margin-bottom:16px; }
+  .placeholder-chat{ background:#e9edf0; border-radius:14px; padding:14px; margin-bottom:16px; }
+  .placeholder-chat .msg{ background:#fff; border-radius:10px; padding:8px 12px; font-size:12.5px; margin-bottom:8px; max-width:75%; color:#555; }
+  .fine{ font-size:11.5px; color:#a89a97; text-align:center; margin-top:10px; }
 </style>
 </head>
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-left">
-    <span class="badge">Método de Relacionamento</span>
-    <h1>Reconecte-se com quem você <em>ama</em></h1>
-    <p class="hero-desc">Pare de lutar contra o silêncio e a distância. Descubra o método que já ajudou mais de 12.000 casais a restaurarem o amor verdadeiro.</p>
-    <div class="cta-group">
-      <a href="#preco" class="btn-primary">Quero Reconectar Agora</a>
-      <a href="#metodo" class="btn-ghost">Como Funciona</a>
-    </div>
+<!-- SCREEN 0: TEASER -->
+<div class="screen active" id="screen-0">
+  <span class="eyebrow">PASSO 1 DE 6</span>
+  <h1>Descubra a mensagem que faz ela pensar em você de novo — em menos de 1 minuto pra escrever</h1>
+  <div class="chat-mock">
+    <div class="bubble call">📞 Ligação perdida <span class="time">22:41</span></div>
+    <div class="bubble">Oi... você viu minhas stories? <span class="time">22:43</span></div>
+    <div class="bubble call">📞 Ligação perdida <span class="time">23:05</span></div>
+    <div class="bubble">Desculpa te chamar, só queria saber se tá tudo bem com você <span class="time">23:07</span></div>
+  </div>
+  <p style="font-size:14px; text-align:center; font-weight:700; color:var(--wine);">
+    Isso não é sorte. É consequência de UMA mensagem enviada na hora certa.
+  </p>
+  <p style="font-size:13.5px; text-align:center; color:var(--ink-soft);">
+    Responda 5 perguntas rápidas e eu monto seu Protocolo Recomeço personalizado.
+  </p>
+  <button class="cta-btn" onclick="goTo(1)">QUERO MEU PROTOCOLO AGORA</button>
+  <div class="check-list">
+    <div class="check-item"><span class="mark">✓</span> Você recebe um plano de reaproximação feito pro SEU caso.</div>
+    <div class="check-item"><span class="mark">✓</span> Vai descobrir o erro que faz a maioria dos homens perder a ex de vez.</div>
+    <div class="check-item"><span class="mark">✓</span> E o primeiro passo pra reabrir a conversa sem parecer carente.</div>
+  </div>
+</div>
+
+<!-- SCREEN 1: Q1 -->
+<div class="screen" id="screen-1">
+  <span class="eyebrow">PASSO 2 DE 6</span>
+  <div class="progress-track"><div class="progress-fill" style="width:20%"></div></div>
+  <h2 class="question">Como foi o término entre vocês?</h2>
+  <button class="option" onclick="goTo(2)">Ela terminou comigo</button>
+  <button class="option" onclick="goTo(2)">Eu terminei, mas me arrependo</button>
+  <button class="option" onclick="goTo(2)">Foi meio dos dois, mas dói igual</button>
+  <button class="option" onclick="goTo(2)">Nem sei ao certo o que aconteceu</button>
+</div>
+
+<!-- SCREEN 2: Q2 -->
+<div class="screen" id="screen-2">
+  <span class="eyebrow">PASSO 3 DE 6</span>
+  <div class="progress-track"><div class="progress-fill" style="width:40%"></div></div>
+  <h2 class="question">O que mais pesa em você agora?</h2>
+  <button class="option" onclick="goTo(3)">A saudade que não passa</button>
+  <button class="option" onclick="goTo(3)">Raiva de mim mesmo pelo que fiz</button>
+  <button class="option" onclick="goTo(3)">Medo de ela seguir a vida sem mim</button>
+  <button class="option" onclick="goTo(3)">Vergonha de ainda sentir isso</button>
+</div>
+
+<!-- SCREEN 3: Q3 -->
+<div class="screen" id="screen-3">
+  <span class="eyebrow">PASSO 4 DE 6</span>
+  <div class="progress-track"><div class="progress-fill" style="width:60%"></div></div>
+  <h2 class="question">Hoje em dia, como está o contato entre vocês?</h2>
+  <button class="option" onclick="goTo(4)">Ainda trocamos mensagem de vez em quando</button>
+  <button class="option" onclick="goTo(4)">Ela só visualiza e não responde</button>
+  <button class="option" onclick="goTo(4)">Fui bloqueado ou ignorado</button>
+  <button class="option" onclick="goTo(4)">Só temos contato por causa de terceiros</button>
+</div>
+
+<!-- SCREEN 4: Q4 -->
+<div class="screen" id="screen-4">
+  <span class="eyebrow">PASSO 5 DE 6</span>
+  <div class="progress-track"><div class="progress-fill" style="width:80%"></div></div>
+  <h2 class="question">Se você descobrisse que ela já está saindo com outro cara, o que faria?</h2>
+  <button class="option" onclick="goTo(5)">Tentaria conversar com ela mesmo assim</button>
+  <button class="option" onclick="goTo(5)">Ia sumir e fingir que não me importo</button>
+  <button class="option" onclick="goTo(5)">Ia surtar e cometer um erro</button>
+  <button class="option" onclick="goTo(5)">Não sei, nunca pensei nisso de verdade</button>
+</div>
+
+<!-- SCREEN 5: Q5 (compromisso) -->
+<div class="screen" id="screen-5">
+  <span class="eyebrow">PASSO 6 DE 6</span>
+  <div class="progress-track"><div class="progress-fill" style="width:95%"></div></div>
+  <h2 class="question">Se eu te mostrar um vídeo curto com o passo a passo exato pra reabrir essa porta, você se compromete a assistir até o final?</h2>
+  <button class="option" onclick="goTo(6)">Sim, quero assistir agora</button>
+  <button class="option" onclick="goTo(6)">Sim, e já quero aplicar hoje</button>
+  <button class="option" onclick="goTo(6)">Sim, mas quero entender cada detalhe antes</button>
+</div>
+
+<!-- SCREEN 6: LOADING -->
+<div class="screen" id="screen-6">
+  <div class="loading-wrap">
+    <div class="spinner"></div>
+    <h1 style="font-size:18px;">Montando seu Protocolo Recomeço personalizado...</h1>
+  </div>
+  <div id="steps-container" style="margin-top:24px;"></div>
+</div>
+
+<!-- SCREEN 7: VSL + COPY -->
+<div class="screen" id="screen-7">
+  <span class="eyebrow" style="background:#effbf3; color:var(--green-dark);">✅ PROTOCOLO GERADO</span>
+  <h1>Seu Protocolo Recomeço está pronto. Assista o vídeo abaixo antes de continuar.</h1>
+
+  <div style="border-radius:14px; overflow:hidden; margin-bottom:18px; aspect-ratio:9/16; max-height:640px;">
+    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/tCAzU5OervY?modestbranding=1&rel=0&iv_load_policy=3&fs=0" title="VSL" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block; pointer-events:auto;"></iframe>
   </div>
 
-  <div class="hero-right">
-    <div class="floating-stat" style="top:12%;right:-10px">
-      <span class="stat-num">97%</span>
-      <span class="stat-label">Taxa de satisfação</span>
-    </div>
-    <div class="floating-stat" style="top:42%;left:-10px">
-      <span class="stat-num">12k+</span>
-      <span class="stat-label">Casais transformados</span>
-    </div>
+  <button class="cta-btn" onclick="goTo(8)">QUERO DESBLOQUEAR MEU PROTOCOLO</button>
 
-    <div class="hero-visual">
-      <div class="couple-card">
-        <p>Achávamos que nosso casamento havia acabado. Em 3 semanas de método, nos apaixonamos de novo.</p>
-        <div class="couple-meta">
-          <div class="avatar-pair">
-            <div class="avatar">👩</div>
-            <div class="avatar">👨</div>
-          </div>
-          <div>
-            <span class="couple-name">Ana & Ricardo</span>
-            <span class="couple-sub">Juntos há 12 anos · SP</span>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="copy-block">
+    <p>Eu sei o que passa pela sua cabeça agora: <strong>"e se eu tentar e não der certo de novo?"</strong></p>
+    <p>Por isso resolvi fazer diferente de qualquer outro método por aí: <strong>garantia de 90 dias</strong>, sem letra miúda.</p>
+    <p>Funciona assim: você entra no Protocolo Recomeço hoje, aplica o passo a passo, e se em 90 dias sua ex não voltar a te procurar, você recebe cada centavo de volta.</p>
+    <p>Sem pergunta, sem burocracia. Se não funcionar pra você, você não paga nada.</p>
+    <p>Isso porque eu já vi esse método transformar homens travados em relacionamento em homens que reconquistaram respeito, desejo e atenção — sem virar "mais um curso" na prateleira.</p>
+    <p>Você está prestes a investir numa segunda chance de reescrever essa história. A escolha é simples:</p>
   </div>
-</section>
+  <div class="check-item" style="background:#fdecea;"><span class="mark" style="color:var(--wine);">✕</span> Continuar rolando a tela e perder essa chance.</div>
+  <div class="check-item"><span class="mark">✓</span> Ou clicar agora e começar o processo de trazer ela de volta.</div>
 
-<!-- PROBLEMS -->
-<section class="problems">
-  <div class="problems-text reveal">
-    <span class="section-label">Você se identifica?</span>
-    <h2 class="section-title">Relacionamentos <em>morrem</em> de silêncio lento</h2>
-    <p>A distância não acontece de repente. Ela cresce na rotina, nas brigas sem resolução, nos toques que deixam de existir. Se você chegou até aqui, algo em você ainda quer lutar.</p>
+  <button class="cta-btn" onclick="goTo(8)">CLIQUE AQUI E GARANTA SEU ACESSO</button>
+  <p class="center" style="font-size:12.5px; color:var(--ink-soft);">E se você agir agora, ainda te entrego +4 bônus exclusivos. Olha só:</p>
+</div>
+
+<!-- SCREEN 8: BONUS STACK -->
+<div class="screen" id="screen-8">
+  <div class="center timer">
+    <div class="timer-box"><span id="tmin">15</span><small>MIN</small></div>
+    <div class="timer-box"><span id="tsec">00</span><small>SEG</small></div>
+  </div>
+  <h1 style="text-align:center;">+4 bônus liberados se você entrar nos próximos 15 minutos</h1>
+
+  <div class="bonus-card">
+    <span class="bonus-tag">DE R$147 POR GRÁTIS</span>
+    <div class="bonus-title">🛡️ Guia do Silêncio Estratégico</div>
+    <span class="bonus-old">R$147</span><span class="bonus-free">GRÁTIS</span>
+    <div class="bonus-desc">Os 5 erros que fazem você parecer carente sem perceber — e como cortar cada um ainda essa semana.</div>
   </div>
 
-  <ul class="pain-list">
-    <li class="pain-item">
-      <span class="pain-num">01</span>
-      <div class="pain-text">
-        <h3>Conversas que viram brigas</h3>
-        <p>Qualquer assunto difícil escala rapidamente e ninguém consegue realmente ouvir o outro.</p>
-      </div>
-    </li>
-    <li class="pain-item">
-      <span class="pain-num">02</span>
-      <div class="pain-text">
-        <h3>Falta de intimidade e conexão</h3>
-        <p>A cumplicidade foi se apagando. Vocês dormem no mesmo quarto mas parecem estranhos.</p>
-      </div>
-    </li>
-    <li class="pain-item">
-      <span class="pain-num">03</span>
-      <div class="pain-text">
-        <h3>Sentimento de estar sozinho</h3>
-        <p>Mesmo estando juntos, você se sente incompreendido, invisível e cada vez mais solitário.</p>
-      </div>
-    </li>
-    <li class="pain-item">
-      <span class="pain-num">04</span>
-      <div class="pain-text">
-        <h3>Medo de perder a pessoa que ama</h3>
-        <p>No fundo, você ainda ama. Mas não sabe como voltar àquela conexão que existia antes.</p>
-      </div>
-    </li>
-  </ul>
-</section>
-
-<!-- METHOD -->
-<section class="method" id="metodo">
-  <div class="method-header reveal">
-    <span class="section-label">O Caminho de Volta</span>
-    <h2 class="section-title" style="color:var(--cream)">O método <em>Amor Profundo</em></h2>
+  <div class="bonus-card">
+    <span class="bonus-tag">DE R$197 POR GRÁTIS</span>
+    <div class="bonus-title">💬 Script da Primeira Mensagem</div>
+    <span class="bonus-old">R$197</span><span class="bonus-free">GRÁTIS</span>
+    <div class="bonus-desc">A frase exata pra reabrir a conversa sem soltar "oi, tudo bem?" e sem parecer que está implorando atenção.</div>
   </div>
 
-  <div class="method-grid">
-    <div class="method-card">
-      <span class="method-icon">🔍</span>
-      <h3>Diagnóstico</h3>
-      <p>Identificamos exatamente onde a conexão foi rompida — padrões inconscientes de comunicação, feridas emocionais e gatilhos que sabotam seu relacionamento.</p>
-    </div>
-    <div class="method-card">
-      <span class="method-icon">🗣️</span>
-      <h3>Comunicação Real</h3>
-      <p>Técnicas validadas pela neurociência para transformar conflitos em pontes. Você aprende a falar e, principalmente, a ouvir de verdade.</p>
-    </div>
-    <div class="method-card">
-      <span class="method-icon">💞</span>
-      <h3>Reconexão Profunda</h3>
-      <p>Rituais diários simples que reacendem a intimidade emocional, física e espiritual — reconstruindo a cumplicidade que vocês um dia tiveram.</p>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-  <div class="test-header reveal">
-    <div>
-      <span class="section-label">Histórias Reais</span>
-      <h2 class="section-title">O amor que <em>voltou</em></h2>
-    </div>
-    <div style="font-family:'Cormorant Garamond',serif; font-size:56px; font-weight:300; color:var(--rose); line-height:1">
-      4.9 ★
-    </div>
+  <div class="bonus-card">
+    <span class="bonus-tag">DE R$297 POR GRÁTIS</span>
+    <div class="bonus-title">✉️ Carta de Reconexão Emocional</div>
+    <span class="bonus-old">R$297</span><span class="bonus-free">GRÁTIS</span>
+    <div class="bonus-desc">Um modelo de mensagem mais longa pra usar somente quando o momento certo aparecer — não antes disso.</div>
   </div>
 
-  <div class="test-grid">
-    <div class="test-card featured reveal">
-      <div class="test-stars">★★★★★</div>
-      <p>Estávamos às vésperas do divórcio. Três filhos, 15 anos juntos — e parecia que tudo tinha acabado. O método me ensinou a ver meu marido de novo, como se fosse a primeira vez. Hoje somos mais felizes do que nos primeiros anos.</p>
-      <div class="test-person">
-        <div class="test-avatar">👩</div>
-        <div>
-          <span class="test-name">Fernanda M.</span>
-          <span class="test-since">Juntos há 15 anos · RJ</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="test-small">
-      <div class="test-card reveal">
-        <div class="test-stars">★★★★★</div>
-        <p>Aprendi que o problema não era minha esposa, era a forma como eu me comunicava. Mudança real em semanas.</p>
-        <div class="test-person">
-          <div class="test-avatar">👨</div>
-          <div>
-            <span class="test-name">Carlos R.</span>
-            <span class="test-since">BH · 8 anos juntos</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="test-card reveal" style="background:var(--deep)">
-        <div class="test-stars">★★★★★</div>
-        <p style="color:var(--cream)">Voltamos a rir juntos. Parece simples, mas era o que mais fazia falta.</p>
-        <div class="test-person">
-          <div class="test-avatar" style="background:rgba(255,255,255,0.1)">💑</div>
-          <div>
-            <span class="test-name" style="color:var(--cream)">Juliana & Paulo</span>
-            <span class="test-since" style="color:rgba(250,246,242,0.5)">Porto Alegre</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="final-cta" id="preco">
-  <div class="cta-content reveal">
-    <span class="section-label">Comece Hoje</span>
-    <h2 class="section-title">Cada dia <em>importa</em></h2>
-    <p>A distância cresce com o tempo. O melhor momento para agir era ontem. O segundo melhor momento é agora — antes que o silêncio se torne permanente.</p>
-    <div style="display:flex; flex-direction:column; gap:16px; max-width:340px;">
-      <div style="display:flex; align-items:center; gap:12px; font-size:14px; color:var(--muted)">
-        <span style="color:var(--rose); font-size:18px">♥</span>
-        Acesso imediato, 100% online
-      </div>
-      <div style="display:flex; align-items:center; gap:12px; font-size:14px; color:var(--muted)">
-        <span style="color:var(--rose); font-size:18px">♥</span>
-        Funciona mesmo se só você fizer
-      </div>
-      <div style="display:flex; align-items:center; gap:12px; font-size:14px; color:var(--muted)">
-        <span style="color:var(--rose); font-size:18px">♥</span>
-        Garantia de 30 dias ou reembolso total
-      </div>
-    </div>
+  <div class="bonus-card">
+    <span class="bonus-tag">DE R$197 POR GRÁTIS</span>
+    <div class="bonus-title">🧭 Mapa do "Novo Cara"</div>
+    <span class="bonus-old">R$197</span><span class="bonus-free">GRÁTIS</span>
+    <div class="bonus-desc">Como agir (e o que NÃO fazer) se ela estiver conhecendo outra pessoa nesse meio tempo.</div>
   </div>
 
-  <div class="price-box reveal">
-    <p class="price-label">Acesso Completo</p>
-    <div class="price-val"><sup>R$</sup>97</div>
-    <p class="price-period">pagamento único · acesso vitalício</p>
-    <ul class="price-includes">
-      <li>Método Amor Profundo completo (6 módulos)</li>
-      <li>Guia de comunicação não-violenta</li>
-      <li>30 rituais de reconexão diária</li>
-      <li>Comunidade privada de casais</li>
-      <li>Suporte por 60 dias</li>
-    </ul>
-    <a href="#" class="btn-full">Quero Reconectar Agora</a>
-    <p class="guarantee">🔒 Garantia de 30 dias — risco zero para você</p>
-  </div>
-</section>
+  <p class="center" style="font-size:12.5px;">Esses bônus ficam disponíveis só enquanto o cronômetro estiver rodando.</p>
+  <button class="cta-btn" onclick="goTo(9)">GARANTIR ACESSO COM OS BÔNUS</button>
+</div>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-brand">Amor<span>Profundo</span></div>
-  <ul class="footer-links">
-    <li><a href="#">Início</a></li>
-    <li><a href="#">Método</a></li>
-    <li><a href="#">Depoimentos</a></li>
-    <li><a href="#">Contato</a></li>
-  </ul>
-  <span class="footer-copy">© 2026 AmorProfundo</span>
-</footer>
+<!-- SCREEN 9: SOCIAL PROOF PLACEHOLDER + FINAL CTA -->
+<div class="screen" id="screen-9">
+  <h1>Homens que estavam exatamente onde você está agora</h1>
+  <div class="note">📌 Troque os quadros abaixo pelos SEUS prints reais de resultado (com autorização de quem enviou). Deixei só a estrutura pronta.</div>
+
+  <div class="placeholder-chat">
+    <div class="msg">[ESPAÇO PRA PRINT 1 — depoimento real do cliente]</div>
+  </div>
+  <div class="placeholder-chat">
+    <div class="msg">[ESPAÇO PRA PRINT 2 — depoimento real do cliente]</div>
+  </div>
+  <div class="placeholder-chat">
+    <div class="msg">[ESPAÇO PRA PRINT 3 — depoimento real do cliente]</div>
+  </div>
+
+  <div class="copy-block">
+    <p>Esses caras estavam bloqueados. Ignorados. Cheios de dúvida se ainda dava tempo.</p>
+    <p>Decidiram agir. Aplicaram o protocolo. E o jogo virou.</p>
+    <p>Hoje são eles que recebem mensagem primeiro. A escolha começa com uma decisão.</p>
+  </div>
+
+  <button class="cta-btn" onclick="alert('Troque este botão pelo link do seu checkout.')">CLIQUE AQUI PARA COMEÇAR AGORA</button>
+  <p class="fine">Protocolo Recomeço — Garantia incondicional de 90 dias.</p>
+</div>
 
 <script>
-  // Reveal on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(el => {
-      if (el.isIntersecting) {
-        el.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.15 });
+let current = 0;
+function goTo(n){
+  document.getElementById('screen-'+current).classList.remove('active');
+  document.getElementById('screen-'+n).classList.add('active');
+  current = n;
+  window.scrollTo(0,0);
+  if(n === 6){ startLoading(); }
+  if(n === 8){ startTimer(); }
+}
 
-  document.querySelectorAll('.reveal, .pain-item').forEach(el => observer.observe(el));
-
-  // Staggered pain items
-  document.querySelectorAll('.pain-item').forEach((el, i) => {
-    el.style.transitionDelay = `${i * 0.12}s`;
+function startLoading(){
+  const steps = [
+    "Analisando o padrão de afastamento dela",
+    "Identificando o gatilho certo pro seu caso",
+    "Montando a mensagem de reabertura de contato",
+    "Calculando o melhor momento pra agir",
+    "Ajustando o tom pra não parecer carência",
+    "Finalizando seu Protocolo Recomeço"
+  ];
+  const container = document.getElementById('steps-container');
+  container.innerHTML = "";
+  steps.forEach((s, i) => {
+    const row = document.createElement('div');
+    row.className = 'step-row';
+    row.innerHTML = `<div class="label"><span>${s}</span><span class="step-pct" id="pct-${i}">0%</span></div>
+      <div class="step-bar"><div class="step-bar-fill" id="fill-${i}"></div></div>`;
+    container.appendChild(row);
   });
+  steps.forEach((s, i) => {
+    setTimeout(() => {
+      document.getElementById('fill-'+i).style.width = '100%';
+      document.getElementById('pct-'+i).textContent = '100%';
+    }, i * 750 + 200);
+  });
+  setTimeout(() => { goTo(7); }, steps.length * 750 + 900);
+}
+
+function startTimer(){
+  let totalSeconds = 15*60;
+  const minEl = document.getElementById('tmin');
+  const secEl = document.getElementById('tsec');
+  clearInterval(window._timerInt);
+  window._timerInt = setInterval(() => {
+    if(totalSeconds <= 0){ clearInterval(window._timerInt); return; }
+    totalSeconds--;
+    const m = Math.floor(totalSeconds/60);
+    const s = totalSeconds % 60;
+    minEl.textContent = String(m).padStart(2,'0');
+    secEl.textContent = String(s).padStart(2,'0');
+  }, 1000);
+}
 </script>
 </body>
 </html>
