@@ -346,24 +346,44 @@ function startBuilding(){
     const row = document.createElement('div');
     row.className = 'step-row';
     row.innerHTML = `<div class="label"><span>${s}</span><span class="step-pct" id="pct2-${i}">0%</span></div>
-      <div class="step-bar"><div class="step-bar-fill" id="fill2-${i}"></div></div>`;
+      <div class="step-bar"><div class="step-bar-fill" id="fill2-${i}" style="transition:none;"></div></div>`;
     container.appendChild(row);
   });
-  steps.forEach((s, i) => {
-    setTimeout(() => {
-      document.getElementById('fill2-'+i).style.width = '100%';
-      document.getElementById('pct2-'+i).textContent = '100%';
-    }, i * perStep + 300);
-  });
-  setTimeout(() => {
-    buildingBox.style.display = 'none';
-    reveal.style.display = 'block';
-    reveal.style.animation = 'slideIn .5s cubic-bezier(.22,1,.36,1)';
-    document.getElementById('vsl-heading').textContent = 'Seu Protocolo Recomeço está pronto. Continue assistindo e role a tela pra ver os próximos passos.';
-    document.getElementById('vsl-eyebrow').textContent = '✅ PROTOCOLO GERADO';
-    document.getElementById('vsl-eyebrow').style.background = '#effbf3';
-    document.getElementById('vsl-eyebrow').style.color = 'var(--green-dark)';
-  }, totalDuration + 300);
+
+  function runStep(i){
+    if(i >= steps.length){
+      setTimeout(() => {
+        buildingBox.style.display = 'none';
+        reveal.style.display = 'block';
+        reveal.style.animation = 'slideIn .5s cubic-bezier(.22,1,.36,1)';
+        document.getElementById('vsl-heading').textContent = 'Seu Protocolo Recomeço está pronto. Continue assistindo e role a tela pra ver os próximos passos.';
+        document.getElementById('vsl-eyebrow').textContent = '✅ PROTOCOLO GERADO';
+        document.getElementById('vsl-eyebrow').style.background = '#effbf3';
+        document.getElementById('vsl-eyebrow').style.color = 'var(--green-dark)';
+      }, 300);
+      return;
+    }
+    const fillEl = document.getElementById('fill2-'+i);
+    const pctEl = document.getElementById('pct2-'+i);
+    let pct = 10;
+    fillEl.style.width = pct + '%';
+    pctEl.textContent = pct + '%';
+    const ticks = 18; // quantos incrementos até 100%
+    const tickTime = perStep / ticks;
+    const increment = (100 - pct) / ticks;
+    let count = 0;
+    const interval = setInterval(() => {
+      count++;
+      pct = Math.min(100, Math.round(10 + increment * count));
+      fillEl.style.width = pct + '%';
+      pctEl.textContent = pct + '%';
+      if(count >= ticks || pct >= 100){
+        clearInterval(interval);
+        setTimeout(() => runStep(i + 1), 150);
+      }
+    }, tickTime);
+  }
+  runStep(0);
 }
 
 function startTimer(){
