@@ -125,6 +125,27 @@
   .placeholder-chat{ background:#e9edf0; border-radius:14px; padding:14px; margin-bottom:16px; }
   .placeholder-chat .msg{ background:#fff; border-radius:10px; padding:8px 12px; font-size:12.5px; margin-bottom:8px; max-width:75%; color:#555; }
   .fine{ font-size:11.5px; color:#a89a97; text-align:center; margin-top:10px; }
+
+  /* WhatsApp-style testimonial chat */
+  .wa-wrap{ background:#0b141a; border-radius:16px; padding:14px 10px; margin-bottom:16px; }
+  .wa-name{ color:#e9edf0; font-size:12.5px; font-weight:700; margin-bottom:8px; padding:0 4px; }
+  .wa-bubble{ background:#202c33; color:#e9edf0; border-radius:8px; padding:8px 10px; margin-bottom:6px; font-size:13px; max-width:85%; line-height:1.4; }
+  .wa-bubble.out{ margin-left:auto; background:#005c4b; }
+  .wa-time{ font-size:10px; color:#8696a0; display:block; text-align:right; margin-top:2px; }
+  .wa-photo{ background:#1f2c33; border:1.5px dashed #3b4a52; border-radius:10px; min-height:150px; display:flex; align-items:center; justify-content:center; color:#8696a0; font-size:11.5px; text-align:center; padding:14px; margin-bottom:8px; }
+
+  /* Checkout embutido */
+  .checkout-box{ border:1.5px solid #eadedc; border-radius:16px; padding:18px; margin-bottom:16px; }
+  .checkout-price{ text-align:center; margin-bottom:16px; }
+  .checkout-price .old{ text-decoration:line-through; color:#a89a97; font-size:14px; }
+  .checkout-price .now{ font-size:32px; font-weight:900; color:var(--wine); }
+  .field-group{ margin-bottom:12px; }
+  .field-group label{ display:block; font-size:12.5px; font-weight:700; color:var(--ink); margin-bottom:5px; }
+  .field-group input{ width:100%; border:1.5px solid var(--card-line); border-radius:10px; padding:12px 14px; font-size:14.5px; font-family:inherit; }
+  .field-group input:focus{ outline:none; border-color:var(--wine); }
+  .field-row{ display:flex; gap:10px; }
+  .field-row .field-group{ flex:1; }
+  .secure-badge{ display:flex; align-items:center; justify-content:center; gap:6px; font-size:12px; color:var(--ink-soft); margin-top:10px; }
 </style>
 </head>
 <body>
@@ -360,19 +381,27 @@
   <button class="cta-btn" onclick="goTo(10)">GARANTIR ACESSO COM OS BÔNUS</button>
 </div>
 
-<!-- SCREEN 10: SOCIAL PROOF PLACEHOLDER + FINAL CTA -->
+<!-- SCREEN 10: SOCIAL PROOF (estilo chat) + FINAL CTA -->
 <div class="screen" id="screen-10">
   <h1>Homens que estavam exatamente onde você está agora</h1>
-  <div class="note">📌 Troque os quadros abaixo pelos SEUS prints reais de resultado (com autorização de quem enviou). Deixei só a estrutura pronta.</div>
+  <div class="note">📌 Troque os blocos abaixo pelos SEUS prints ou depoimentos reais (com autorização de quem enviou). Pode me mandar as imagens ou os links que você tem que eu encaixo certinho aqui.</div>
 
-  <div class="placeholder-chat">
-    <div class="msg">[ESPAÇO PRA PRINT 1 — depoimento real do cliente]</div>
+  <div class="wa-wrap">
+    <div class="wa-name">Depoimento 1</div>
+    <div class="wa-photo">[FOTO/PRINT REAL 1]</div>
+    <div class="wa-bubble out">[Texto do depoimento aqui]<span class="wa-time">21:04</span></div>
   </div>
-  <div class="placeholder-chat">
-    <div class="msg">[ESPAÇO PRA PRINT 2 — depoimento real do cliente]</div>
+
+  <div class="wa-wrap">
+    <div class="wa-name">Depoimento 2</div>
+    <div class="wa-photo">[FOTO/PRINT REAL 2]</div>
+    <div class="wa-bubble out">[Texto do depoimento aqui]<span class="wa-time">15:08</span></div>
   </div>
-  <div class="placeholder-chat">
-    <div class="msg">[ESPAÇO PRA PRINT 3 — depoimento real do cliente]</div>
+
+  <div class="wa-wrap">
+    <div class="wa-name">Depoimento 3</div>
+    <div class="wa-photo">[FOTO/PRINT REAL 3]</div>
+    <div class="wa-bubble out">[Texto do depoimento aqui]<span class="wa-time">13:08</span></div>
   </div>
 
   <div class="copy-block">
@@ -381,8 +410,57 @@
     <p>Hoje são eles que recebem mensagem primeiro. A escolha começa com uma decisão.</p>
   </div>
 
-  <button class="cta-btn" onclick="alert('Troque este botão pelo link do seu checkout.')">CLIQUE AQUI PARA COMEÇAR AGORA</button>
+  <button class="cta-btn" onclick="goTo(11)">CLIQUE AQUI PARA COMEÇAR AGORA</button>
   <p class="fine">Protocolo Recomeço — Garantia incondicional de 90 dias.</p>
+</div>
+
+<!-- SCREEN 11: CHECKOUT EMBUTIDO -->
+<div class="screen" id="screen-11">
+  <h1 style="text-align:center;">Finalize seu acesso ao Protocolo Recomeço</h1>
+
+  <div class="checkout-price">
+    <span class="old">De R$97,00</span><br>
+    <span class="now">R$19,90</span>
+    <p style="font-size:12.5px; color:var(--ink-soft); margin-top:4px;">Pagamento único • Acesso imediato</p>
+  </div>
+
+  <div class="checkout-box">
+    <div class="field-group">
+      <label>Nome completo</label>
+      <input type="text" placeholder="Seu nome completo">
+    </div>
+    <div class="field-group">
+      <label>E-mail</label>
+      <input type="email" placeholder="seuemail@exemplo.com">
+    </div>
+    <div class="field-group">
+      <label>WhatsApp (com DDD)</label>
+      <input type="tel" placeholder="(00) 00000-0000">
+    </div>
+    <div class="field-group">
+      <label>Número do cartão</label>
+      <input type="text" placeholder="0000 0000 0000 0000">
+    </div>
+    <div class="field-row">
+      <div class="field-group">
+        <label>Validade</label>
+        <input type="text" placeholder="MM/AA">
+      </div>
+      <div class="field-group">
+        <label>CVV</label>
+        <input type="text" placeholder="000">
+      </div>
+    </div>
+    <button class="cta-btn pulse" style="margin-top:6px;" onclick="alert('Aqui entra a chamada real pro seu gateway de pagamento (Mercado Pago, Hotmart, etc.) quando você configurar.')">FINALIZAR COMPRA — R$19,90</button>
+    <div class="secure-badge">🔒 Ambiente 100% seguro</div>
+  </div>
+
+  <div class="check-list">
+    <div class="check-item"><span class="mark">✓</span> Acesso liberado na hora, direto no seu e-mail.</div>
+    <div class="check-item"><span class="mark">✓</span> Garantia incondicional de 90 dias.</div>
+    <div class="check-item"><span class="mark">✓</span> +4 bônus exclusivos inclusos sem custo extra.</div>
+  </div>
+  <div class="note">📌 Esse formulário está pronto visualmente, mas ainda precisa ser ligado ao seu gateway de pagamento (Mercado Pago, Hotmart, Kiwify etc.) pra cobrar de verdade. Me avisa quando escolher qual, que eu ajudo a integrar.</div>
 </div>
 
 <script>
