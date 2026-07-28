@@ -146,6 +146,14 @@
   .field-row{ display:flex; gap:10px; }
   .field-row .field-group{ flex:1; }
   .secure-badge{ display:flex; align-items:center; justify-content:center; gap:6px; font-size:12px; color:var(--ink-soft); margin-top:10px; }
+
+  /* Carrossel de depoimentos */
+  .testi-carousel{ position:relative; width:100%; aspect-ratio:3/4; border-radius:16px; overflow:hidden; margin-bottom:16px; background:#111; }
+  .testi-carousel img{ position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .6s ease; }
+  .testi-carousel img.active{ opacity:1; }
+  .testi-dots{ display:flex; justify-content:center; gap:6px; margin-bottom:20px; }
+  .testi-dots span{ width:7px; height:7px; border-radius:50%; background:#e6cfcb; transition: background .3s ease; }
+  .testi-dots span.active{ background: var(--wine); }
 </style>
 </head>
 <body>
@@ -381,28 +389,19 @@
   <button class="cta-btn" onclick="goTo(10)">GARANTIR ACESSO COM OS BÔNUS</button>
 </div>
 
-<!-- SCREEN 10: SOCIAL PROOF (estilo chat) + FINAL CTA -->
+<!-- SCREEN 10: SOCIAL PROOF (carrossel de prints reais) + FINAL CTA -->
 <div class="screen" id="screen-10">
   <h1>Homens que estavam exatamente onde você está agora</h1>
-  <div class="note">📌 Troque os blocos abaixo pelos SEUS prints ou depoimentos reais (com autorização de quem enviou). Pode me mandar as imagens ou os links que você tem que eu encaixo certinho aqui.</div>
 
-  <div class="wa-wrap">
-    <div class="wa-name">Depoimento 1</div>
-    <div class="wa-photo">[FOTO/PRINT REAL 1]</div>
-    <div class="wa-bubble out">[Texto do depoimento aqui]<span class="wa-time">21:04</span></div>
+  <div class="testi-carousel" id="testi-carousel">
+    <img src="https://i.ibb.co/Kj96TTj0/Whats-App-Image-2026-07-27-at-21-48-42.jpg" class="active">
+    <img src="https://i.ibb.co/WhfWhGW/Whats-App-Image-2026-07-27-at-21-48-58.jpg">
+    <img src="https://i.ibb.co/jvGvzC8W/Whats-App-Image-2026-07-27-at-21-49-12.jpg">
+    <img src="https://i.ibb.co/CfXmLsR/Whats-App-Image-2026-07-27-at-21-49-36.jpg">
+    <img src="https://i.ibb.co/FbcrS19K/Whats-App-Image-2026-07-27-at-21-50-10.jpg">
+    <img src="https://i.ibb.co/hS7RGVB/Whats-App-Image-2026-07-27-at-21-50-30.jpg">
   </div>
-
-  <div class="wa-wrap">
-    <div class="wa-name">Depoimento 2</div>
-    <div class="wa-photo">[FOTO/PRINT REAL 2]</div>
-    <div class="wa-bubble out">[Texto do depoimento aqui]<span class="wa-time">15:08</span></div>
-  </div>
-
-  <div class="wa-wrap">
-    <div class="wa-name">Depoimento 3</div>
-    <div class="wa-photo">[FOTO/PRINT REAL 3]</div>
-    <div class="wa-bubble out">[Texto do depoimento aqui]<span class="wa-time">13:08</span></div>
-  </div>
+  <div class="testi-dots" id="testi-dots"></div>
 
   <div class="copy-block">
     <p>Esses caras estavam bloqueados. Ignorados. Cheios de dúvida se ainda dava tempo.</p>
@@ -544,6 +543,28 @@ function startTimer(){
 document.getElementById('vsl-video').addEventListener('play', function(){
   setTimeout(() => { startBuilding(); }, 10000);
 }, { once: true });
+
+// Carrossel de depoimentos (troca sozinho)
+(function(){
+  const carousel = document.getElementById('testi-carousel');
+  const dotsWrap = document.getElementById('testi-dots');
+  if(!carousel) return;
+  const imgs = carousel.querySelectorAll('img');
+  imgs.forEach((img, i) => {
+    const dot = document.createElement('span');
+    if(i === 0) dot.classList.add('active');
+    dotsWrap.appendChild(dot);
+  });
+  const dots = dotsWrap.querySelectorAll('span');
+  let idx = 0;
+  setInterval(() => {
+    imgs[idx].classList.remove('active');
+    dots[idx].classList.remove('active');
+    idx = (idx + 1) % imgs.length;
+    imgs[idx].classList.add('active');
+    dots[idx].classList.add('active');
+  }, 2800);
+})();
 
 </script>
 </body>
