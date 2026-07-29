@@ -215,6 +215,14 @@
   .avatar.avatar-initials{font-size:14px;}
   .live-badge{display:inline-flex;align-items:center;gap:5px;background:#fff0f0;color:var(--red);font-size:11px;font-weight:800;padding:4px 10px;border-radius:999px;margin:0 auto 12px;width:fit-content;text-transform:uppercase;letter-spacing:.4px;}
   .live-badge .dot-live{background:var(--red);}
+
+  /* NOTIFICAÇÃO DE COMPRA (canto do checkout) */
+  #purchase-toast{position:fixed;left:10px;bottom:14px;z-index:500;background:#fff;border:1px solid #eee;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.14);padding:8px 12px;display:flex;align-items:center;gap:8px;max-width:230px;transform:translateY(80px);opacity:0;transition:transform .4s ease,opacity .4s ease;pointer-events:none;}
+  #purchase-toast.show{transform:translateY(0);opacity:1;}
+  .pt-icon{width:26px;height:26px;border-radius:50%;background:#e9fbef;color:#1a9c4a;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;}
+  .pt-text{font-size:11.5px;line-height:1.3;color:#333;}
+  .pt-text strong{color:var(--black);}
+  .pt-text span{display:block;color:#999;font-size:10.5px;margin-top:1px;}
 </style>
 </head>
 <body>
@@ -225,7 +233,6 @@
     <div class="headline-wrap">
       <span class="eyebrow">⚠️ Atenção Homens</span>
       <h1>Doutor Revela 3 <span>Técnicas Ocultas</span> Para Engrossar e crescer o PÊNIS EM 45 DIAS</h1>
-      <p class="sub-headline">Assista o vídeo abaixo até o final e descubra Antes que seja removido da internet</p>
     </div>
 
     <div class="trust-strip">
@@ -436,6 +443,11 @@
       <p>Seu acesso foi liberado. Você receberá as instruções no e-mail informado em poucos minutos.</p>
     </div>
   </div>
+
+  <div id="purchase-toast">
+    <div class="pt-icon">✓</div>
+    <div class="pt-text" id="purchase-toast-text"></div>
+  </div>
 </div>
 
 <!-- EXIT MODAL VSL -->
@@ -514,7 +526,7 @@ function updateVolIcon(){if(video.muted||video.volume===0){volIcon.innerHTML='<p
 
 document.getElementById('fs-btn').addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen();else playerWrap.requestFullscreen&&playerWrap.requestFullscreen();});
 
-function goToPix(){video.pause();document.getElementById('vsl-page').style.display='none';document.getElementById('pix-page').style.display='block';window.scrollTo(0,0);}
+function goToPix(){video.pause();document.getElementById('vsl-page').style.display='none';document.getElementById('pix-page').style.display='block';window.scrollTo(0,0);iniciarPurchaseToast();}
 
 function showPixError(msg){const e=document.getElementById('pix-error');e.textContent=msg;e.style.display='block';}
 function hidePixError(){document.getElementById('pix-error').style.display='none';}
@@ -671,16 +683,21 @@ document.getElementById('inp-cpf').addEventListener('input',function(){
 
 /* ===================== COMENTÁRIOS DINÂMICOS ===================== */
 const FOTOS=[
-  "https://i.ibb.co/zh4tGPvV/6d8eefeb2279397e063efc6de44d1719.jpg",
-  "https://i.ibb.co/B5zDcfHX/44bf1f1032cb6af771f03fc3d6756322.jpg",
-  "https://i.ibb.co/MDQJT2Pj/785daa1ba9c2af255e9763c3583219ef.jpg",
-  "https://i.ibb.co/n8CbpGRb/ad1ff76105145103de40eb803453e7bd.jpg",
-  "https://i.ibb.co/9RjB2cy/97f670e76a45ffdef9442831d7f2d25f.jpg",
-  "https://i.ibb.co/MkhfxfmX/cc32b7d1d2570a932642813f1fb257a6.jpg",
-  "https://i.ibb.co/SDPTBQWC/df0f3cf7d50a83f39139b5acf9679e25.jpg",
-  "https://i.ibb.co/R4vhK2Y1/b7949cc4cc545ba356717d825c2a9252.jpg",
-  "https://i.ibb.co/5hCtWtVm/6b1e3721a0b76c49ceb534cd52c8a5e9.jpg",
-  "https://i.ibb.co/d8SFMtr/5e3da5214c03bf5bf351b6dc91098e33.jpg"
+  "https://i.ibb.co/n8ms7H7S/Design-sem-nome.png",
+  "https://i.ibb.co/JRgjrh5z/Design-sem-nome-1.jpg",
+  "https://i.ibb.co/SXctj2qP/Design-sem-nome-2.jpg",
+  "https://i.ibb.co/VYXMw2gk/Design-sem-nome-3.jpg",
+  "https://i.ibb.co/hxxMbxtS/Design-sem-nome-4.jpg",
+  "https://i.ibb.co/xSyVtzq6/Design-sem-nome-5.jpg",
+  "https://i.ibb.co/pvQ5mHRw/Design-sem-nome-6.jpg",
+  "https://i.ibb.co/9Hgwk037/Design-sem-nome-7.jpg",
+  "https://i.ibb.co/Df4W3QbR/Design-sem-nome-8.jpg",
+  "https://i.ibb.co/Kc6CXfcj/Design-sem-nome-9.jpg",
+  "https://i.ibb.co/Jw2HfqP1/Design-sem-nome-10.jpg",
+  "https://i.ibb.co/W4qXKf31/Design-sem-nome-11.jpg",
+  "https://i.ibb.co/NbybvR9/Design-sem-nome-12.jpg",
+  "https://i.ibb.co/cS9YCNX1/Design-sem-nome-13.jpg",
+  "https://i.ibb.co/kg5b5bwW/Design-sem-nome-14.jpg"
 ];
 
 const COMENTARIOS_POOL=[
@@ -694,11 +711,11 @@ const COMENTARIOS_POOL=[
   {nome:"Bruno L.",local:"SC",texto:"Achei que fosse enrolação, mas o doutor explica direitinho o porquê de cada técnica funcionar. Vale muito a pena.",tempo:"há 25 min",foto:FOTOS[7]},
   {nome:"Rafael N.",local:"GO",texto:"Testei essa semana e o resultado surpreendeu, é bem mais fácil de aplicar do que eu imaginava.",tempo:"há 29 min",foto:FOTOS[8]},
   {nome:"Thiago C.",local:"CE",texto:"Já tinha desistido de tentar outros métodos, esse aqui é prático e direto ao ponto. Recomendo de olhos fechados.",tempo:"há 33 min",foto:FOTOS[9]},
-  {nome:"Eduardo V.",local:"DF",texto:"O acesso caiu na hora no meu e-mail, comecei a aplicar no mesmo dia. Simples e sem complicação.",tempo:"há 38 min",foto:FOTOS[2]},
-  {nome:"Leonardo R.",local:"ES",texto:"Fiquei surpreso com a qualidade do conteúdo pelo preço. Explicação clara, fácil de entender e aplicar.",tempo:"há 42 min",foto:FOTOS[5]},
-  {nome:"Vinícius A.",local:"PA",texto:"Comprei meio na dúvida, mas o suporte respondeu rápido e o conteúdo é muito bom. Já indiquei pro meu cunhado.",tempo:"há 47 min",foto:FOTOS[0]},
-  {nome:"Gustavo B.",local:"MT",texto:"Uso há poucos dias e já sinto diferença, o passo a passo é bem explicado, dá pra seguir sem erro.",tempo:"há 52 min",foto:FOTOS[7]},
-  {nome:"Alexandre D.",local:"AM",texto:"Sempre desconfiado desse tipo de coisa, mas resolvi arriscar pelo preço baixo. Superou minha expectativa.",tempo:"há 58 min",foto:FOTOS[3]}
+  {nome:"Eduardo V.",local:"DF",texto:"O acesso caiu na hora no meu e-mail, comecei a aplicar no mesmo dia. Simples e sem complicação.",tempo:"há 38 min",foto:FOTOS[10]},
+  {nome:"Leonardo R.",local:"ES",texto:"Fiquei surpreso com a qualidade do conteúdo pelo preço. Explicação clara, fácil de entender e aplicar.",tempo:"há 42 min",foto:FOTOS[11]},
+  {nome:"Vinícius A.",local:"PA",texto:"Comprei meio na dúvida, mas o suporte respondeu rápido e o conteúdo é muito bom. Já indiquei pro meu cunhado.",tempo:"há 47 min",foto:FOTOS[12]},
+  {nome:"Gustavo B.",local:"MT",texto:"Uso há poucos dias e já sinto diferença, o passo a passo é bem explicado, dá pra seguir sem erro.",tempo:"há 52 min",foto:FOTOS[13]},
+  {nome:"Alexandre D.",local:"AM",texto:"Sempre desconfiado desse tipo de coisa, mas resolvi arriscar pelo preço baixo. Superou minha expectativa.",tempo:"há 58 min",foto:FOTOS[14]}
 ];
 
 const AVATAR_CORES=["#E8000D","#B50009","#FF1A24","#c2000c","#8f0007"];
@@ -758,6 +775,32 @@ function adicionarNovoComentario(){
 
 renderInicial();
 setInterval(adicionarNovoComentario, 6000 + Math.random()*4000);
+
+/* ===================== AVISO DE COMPRA (checkout) ===================== */
+const NOMES_COMPRA=["Paulo","Matheus","Marcos","Lucas","Rodrigo","Fernando","Gabriel","André","Wesley","Cauã","Renato","Igor","Douglas","Sérgio","Fábio"];
+const TEMPOS_COMPRA=["agora","há 1 minuto","há 2 minutos","há 3 minutos","há 5 minutos","há 7 minutos","há 9 minutos"];
+const AÇÕES_COMPRA=["levou","adquiriu","garantiu o acesso","acabou de comprar"];
+let purchaseToastAtivo=false;
+
+function proximaNotificacaoCompra(){
+  const nome=NOMES_COMPRA[Math.floor(Math.random()*NOMES_COMPRA.length)];
+  const tempo=TEMPOS_COMPRA[Math.floor(Math.random()*TEMPOS_COMPRA.length)];
+  const acao=AÇÕES_COMPRA[Math.floor(Math.random()*AÇÕES_COMPRA.length)];
+  const toast=document.getElementById('purchase-toast');
+  const texto=document.getElementById('purchase-toast-text');
+  texto.innerHTML=`<strong>${nome}</strong> ${acao}<span>${tempo}</span>`;
+  toast.classList.add('show');
+  setTimeout(()=>{toast.classList.remove('show');},4200);
+}
+
+function iniciarPurchaseToast(){
+  if(purchaseToastAtivo)return;
+  purchaseToastAtivo=true;
+  setTimeout(proximaNotificacaoCompra,2500);
+  setInterval(()=>{
+    if(document.getElementById('pix-page').style.display==='block')proximaNotificacaoCompra();
+  },7000+Math.random()*3000);
+}
 </script>
 </body>
 </html>
